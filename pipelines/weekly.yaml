@@ -1,0 +1,57 @@
+# Skill Hub 每周执行流水线
+# 每周五下午执行
+
+name: weekly-pipeline
+schedule: "0 15 * * 5"  # 每周五 15:00
+
+steps:
+  - name: weekly-report
+    agent: agent-a-tracker
+    action: |
+      生成周报：
+      1. 汇总本周每日数据
+      2. 计算周增量和增长率
+      3. 渠道归因分析
+      4. 与里程碑对比
+
+  - name: content-production
+    agent: agent-c-content
+    action: |
+      规划下周内容：
+      1. 确定下周深度教程主题
+      2. 准备 2-3 条短内容素材
+      3. 规划视频演示脚本
+      4. 确认投放渠道和时间
+
+  - name: quality-audit
+    agent: agent-b-quality
+    action: |
+      定期质量巡检：
+      1. 对所有已上架 Skill 重新评分
+      2. 检查是否有新的安全风险
+      3. 验证交叉导流逻辑是否正常
+
+  - name: registry-update
+    agent: agent-f-registry
+    action: |
+      更新推荐源：
+      1. 检查是否有新 Skill 需要加入
+      2. 更新质量评级
+      3. 验证所有安装链接可用
+      4. Bump version 并更新 updated_at
+
+  - name: competitor-weekly
+    agent: agent-d-competitor
+    action: |
+      竞品周报：
+      1. 汇总本周竞品动态
+      2. 分析市场趋势
+      3. 提出下周策略建议
+
+outputs:
+  - type: weekly-report
+    destination: 飞书文档
+    includes:
+      - weekly-report
+      - content-production
+      - competitor-weekly

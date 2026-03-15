@@ -1,0 +1,52 @@
+# Skill Hub 每日执行流水线
+# 由 Claude Code cron 或外部 scheduler 触发
+
+name: daily-pipeline
+schedule: "0 6 * * *"  # 每天 06:00
+
+steps:
+  - name: data-collection
+    agent: agent-a-tracker
+    action: |
+      执行每日数据抓取：
+      1. 获取所有 Skill 在 skills.sh 的安装量和排名
+      2. 获取 ClawHub 的 Stars 和排名
+      3. 记录到日志
+
+  - name: competitor-scan
+    agent: agent-d-competitor
+    action: |
+      执行每日竞品扫描：
+      1. 检查 skills.sh Hot/Trending 榜变化
+      2. 检查是否有新的直接竞品上架
+      3. 标记威胁等级
+
+  - name: deviation-check
+    agent: agent-a-tracker
+    depends_on: data-collection
+    action: |
+      计算里程碑偏差：
+      1. 确定当前周次
+      2. 对比实际 vs 目标
+      3. 偏差 > 15% 则触发预警
+
+  - name: daily-report
+    agent: agent-a-tracker
+    depends_on:
+      - data-collection
+      - competitor-scan
+      - deviation-check
+    action: |
+      生成日报并发送到飞书群：
+      1. 汇总安装数据
+      2. 附加竞品动态
+      3. 标注偏差状态（🟢/🟡/🔴）
+
+alerts:
+  - condition: deviation > 15%
+    action: 发送飞书预警消息到核心群
+    urgency: high
+
+  - condition: new_competitor_threat == "high"
+    action: 发送飞书预警消息到核心群
+    urgency: high

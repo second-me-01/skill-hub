@@ -1,0 +1,69 @@
+# Skill Hub 阶段门控
+# 当安装量达到阶段门槛时触发
+
+name: phase-gate
+trigger: manual  # 由 Agent A 偏差检查触发
+
+gates:
+  - name: phase-1-to-2
+    condition: total_installs >= 5000
+    actions:
+      - description: "启动卫星 Skill 交叉导流"
+        steps:
+          - 确认所有 5 个卫星 Skill 已上架并通过质量审核
+          - 激活卫星 Skill 中的交叉导流逻辑
+          - 开始垂直社区精准投放
+          - 启动 ClawHub ROCKETS 30 天冲刺
+      - description: "内容策略升级"
+        steps:
+          - Agent C 从 Phase 1 模板切换到 Phase 2 模板
+          - 每个卫星 Skill 匹配对应垂直社区
+          - 开始收集用户反馈和案例
+
+  - name: phase-2-to-3
+    condition: total_installs >= 30000
+    actions:
+      - description: "开放第三方入驻准备"
+        steps:
+          - 制定第三方入驻规范文档
+          - 配置 Agent B 的第三方审核流程
+          - 配置 Agent F 的第三方 Skill 管理流程
+          - 创建入驻申请 Issue 模板
+      - description: "扩展卫星 Skill 矩阵"
+        steps:
+          - 从 5 个扩展到 10-15 个卫星 Skill
+          - 覆盖更多垂直场景
+          - 每个新 Skill 必须通过 Agent B 审核
+
+  - name: phase-3-to-4
+    condition: total_installs >= 100000
+    actions:
+      - description: "企业批量安装策略"
+        steps:
+          - 制定企业版安装指南
+          - 准备 CTO/技术负责人推广材料
+          - 支持一键全团队部署
+      - description: "数据飞轮启动"
+        steps:
+          - 基于用户行为数据优化推荐排序
+          - 收集安装来源分析（哪个卫星 Skill 导流最多）
+          - 优化转化率最低的环节
+
+  - name: final-goal
+    condition: total_installs >= 200000
+    actions:
+      - description: "目标达成庆祝 🎉"
+        steps:
+          - 生成完整增长复盘报告
+          - 分析各阶段关键决策和转折点
+          - 规划下一阶段目标（200K → 500K）
+
+blockers:
+  - description: "Phase 门槛未达时的复盘机制"
+    condition: "phase 预期完成时间超期 2 周"
+    actions:
+      - 阻断进入下阶段
+      - 触发根因分析
+      - Agent A 生成偏差报告
+      - 团队复盘会议
+      - 调整策略后重新设定时间线
