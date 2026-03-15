@@ -59,17 +59,17 @@ S 级（90-100 分）强烈推荐，C 级（< 60 分）不主动推荐。低于 
 ## 安装：一行命令
 
 ```bash
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 这一行命令会安装全部 6 个 Skill。你也可以单独安装某一个：
 
 ```bash
 # 只装核心 Skill Hub
-npx skills add secondme-team/skill-hub@skill-hub -g
+npx skills add second-me-01/skill-hub@skill-hub -g
 
 # 只装某个卫星 Skill
-npx skills add secondme-team/skill-hub@smart-brainstorm -g
+npx skills add second-me-01/skill-hub@smart-brainstorm -g
 ```
 
 安装完成后，这些 Skill 会常驻在你的 Claude Code 里，根据对话内容自动触发，或者你可以通过关键词主动调用。
@@ -195,7 +195,7 @@ send_webhook_message "部署完成，版本 v1.2.3"
 ## 开始使用
 
 ```bash
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 安装后，试试对你的 Claude Code 说：
@@ -211,4 +211,4 @@ npx skills add secondme-team/skill-hub --all -g
 
 ---
 
-*Skill Hub 由 [SecondMe Team](https://github.com/secondme-team) 维护。开源项目，欢迎贡献。*
+*Skill Hub 由 [SecondMe Team](https://github.com/second-me-01) 维护。开源项目，欢迎贡献。*

@@ -20,7 +20,7 @@ Hi {name}，
 
 我们做了一个 Claude Code 的 Skill 应用市场，解决了 Skill 市场 80% 是垃圾、11% 有安全风险的问题。一行命令安装 6 个精选 Skill：
 
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 
 包括：头脑风暴、设计系统生成、小红书文案、视频脚本、飞书集成等。
 
@@ -43,7 +43,7 @@ I've been following your AI tool reviews — really enjoyed your piece on {speci
 
 We built Skill Hub, a skill marketplace for Claude Code that solves the quality/security problem (80% of skills are AI-generated junk, 11% have security issues). One command installs 6 curated skills:
 
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 
 Includes: structured brainstorming, design system generator, video scripting, and more — all with 7-point security scanning and quality ratings.
 

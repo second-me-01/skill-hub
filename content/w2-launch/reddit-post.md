@@ -60,13 +60,13 @@ Skill Hub ships with 6 skills out of the box:
 ## Install
 
 ```bash
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 That's it. One command installs all 6 skills globally. You can also install individually:
 
 ```bash
-npx skills add secondme-team/skill-hub@smart-brainstorm -g
+npx skills add second-me-01/skill-hub@smart-brainstorm -g
 ```
 
 After installation, skills activate contextually based on your conversation, or you can trigger them explicitly.
@@ -80,6 +80,6 @@ After installation, skills activate contextually based on your conversation, or 
 
 The entire project is open source. Every line of every skill is auditable.
 
-GitHub: https://github.com/secondme-team/skill-hub
+GitHub: https://github.com/second-me-01/skill-hub
 
 Happy to answer questions or take feedback.

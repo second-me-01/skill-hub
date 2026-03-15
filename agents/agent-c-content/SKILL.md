@@ -75,7 +75,7 @@ user-invocable: true
 
 ### Step 1: 安装
 \`\`\`bash
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 \`\`\`
 
 ### Step 2: 使用
@@ -102,7 +102,7 @@ npx skills add secondme-team/skill-hub --all -g
 
 {2-3句具体场景描述}
 
-安装：npx skills add secondme-team/skill-hub --all -g
+安装：npx skills add second-me-01/skill-hub --all -g
 
 {hashtag}
 ```

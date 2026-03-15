@@ -13,52 +13,52 @@
   "featured": [
     {
       "name": "smart-brainstorm",
-      "repo": "secondme-team/skill-hub",
+      "repo": "second-me-01/skill-hub",
       "description": "结构化头脑风暴，支持 SCAMPER/六顶帽/第一性原理等 6+ 框架",
       "description_en": "Structured brainstorming with 6+ frameworks including SCAMPER, Six Thinking Hats, First Principles",
       "quality_rating": "S",
       "category": "productivity",
-      "install_cmd": "npx skills add secondme-team/skill-hub@smart-brainstorm -g -y",
+      "install_cmd": "npx skills add second-me-01/skill-hub@smart-brainstorm -g -y",
       "tags": ["brainstorm", "ideation", "头脑风暴", "创意"]
     },
     {
       "name": "ui-design-system",
-      "repo": "secondme-team/skill-hub",
+      "repo": "second-me-01/skill-hub",
       "description": "设计系统最佳实践，自动生成 Design Tokens、组件规范、响应式方案",
       "description_en": "Design system best practices with auto-generated design tokens, component specs, and responsive patterns",
       "quality_rating": "S",
       "category": "design",
-      "install_cmd": "npx skills add secondme-team/skill-hub@ui-design-system -g -y",
+      "install_cmd": "npx skills add second-me-01/skill-hub@ui-design-system -g -y",
       "tags": ["design system", "UI", "设计系统", "组件库", "Tailwind"]
     },
     {
       "name": "xhs-writer",
-      "repo": "secondme-team/skill-hub",
+      "repo": "second-me-01/skill-hub",
       "description": "小红书爆款内容创作助手，覆盖选题/标题/正文/标签全流程",
       "description_en": "Xiaohongshu (RED) content creation assistant for viral posts",
       "quality_rating": "S",
       "category": "chinese-ecosystem",
-      "install_cmd": "npx skills add secondme-team/skill-hub@xhs-writer -g -y",
+      "install_cmd": "npx skills add second-me-01/skill-hub@xhs-writer -g -y",
       "tags": ["小红书", "种草", "内容创作", "xiaohongshu"]
     },
     {
       "name": "video-script",
-      "repo": "secondme-team/skill-hub",
+      "repo": "second-me-01/skill-hub",
       "description": "短视频脚本/分镜/字幕一站式生成，支持抖音/B站/YouTube",
       "description_en": "Video script, storyboard, and subtitle generator for TikTok/Bilibili/YouTube",
       "quality_rating": "S",
       "category": "content-creation",
-      "install_cmd": "npx skills add secondme-team/skill-hub@video-script -g -y",
+      "install_cmd": "npx skills add second-me-01/skill-hub@video-script -g -y",
       "tags": ["视频脚本", "分镜", "字幕", "短视频", "video"]
     },
     {
       "name": "feishu-kit",
-      "repo": "secondme-team/skill-hub",
+      "repo": "second-me-01/skill-hub",
       "description": "飞书集成工具包：消息/文档/多维表格/机器人/审批",
       "description_en": "Feishu/Lark integration toolkit for messaging, docs, bitable, bot, and approval",
       "quality_rating": "A",
       "category": "chinese-ecosystem",
-      "install_cmd": "npx skills add secondme-team/skill-hub@feishu-kit -g -y",
+      "install_cmd": "npx skills add second-me-01/skill-hub@feishu-kit -g -y",
       "tags": ["飞书", "feishu", "lark", "机器人", "多维表格"]
     }
   ],

@@ -14,7 +14,7 @@ Claude Code 的 Skill 生态有个大问题：80% 质量堪忧，还有一部分
 一行命令装 6 个精选 Skill：结构化头脑风暴（6 种框架）、设计系统生成器（出 Tailwind config + CSS variables）、小红书写手、视频脚本/分镜、飞书集成。
 
 ```
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 装完之后对 Agent 说"帮我找一个做 XXX 的 Skill"就能用了。不自动安装任何东西，不收集数据。
@@ -33,7 +33,7 @@ npx skills add secondme-team/skill-hub --all -g
 
 一行命令全装：
 ```
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 ---
@@ -49,7 +49,7 @@ Skill Hub 的做法：在推荐任何第三方 Skill 前，自动执行 7 条安
 目前自带 5 个高质量 Skill（4 个 S 级 + 1 个 A 级），涵盖头脑风暴、UI 设计系统、小红书、视频脚本、飞书。
 
 ```
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 开源项目，代码全部可审查。

@@ -34,7 +34,7 @@ user-invocable: true
 首先，使用 WebFetch 获取精选推荐列表：
 
 ```
-WebFetch: https://raw.githubusercontent.com/secondme-team/skill-hub/main/registry/recommendations.json
+WebFetch: https://raw.githubusercontent.com/second-me-01/skill-hub/main/registry/recommendations.json
 ```
 
 在推荐列表中匹配用户需求。如果找到匹配项，优先推荐精选列表中的 Skill。

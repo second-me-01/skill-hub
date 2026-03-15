@@ -11,7 +11,7 @@ I built Skill Hub — a marketplace that lives inside your agent. It scans every
 
 One command, 6 curated skills:
 ```
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 ### Tweet 2 (Security angle)
@@ -68,12 +68,12 @@ video-script: Storyboard tables + SRT subtitles + shooting notes for Douyin/Bili
 
 ### Tweet 7 (CTA)
 ```
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 6 skills. Security scanning. Quality ratings. Open source.
 
-GitHub: github.com/secondme-team/skill-hub
+GitHub: github.com/second-me-01/skill-hub
 
 ---
 
@@ -86,7 +86,7 @@ Claude Code 的 Skill 生态有个没人说的问题：大量 Skill 没有安全
 
 一行命令装 6 个精选 Skill：
 ```
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 ### Tweet 2 (安全机制)
@@ -135,13 +135,13 @@ feishu-kit：飞书 5 大场景 API 集成——消息/文档/多维表格/Webho
 
 ### Tweet 7 (CTA)
 ```
-npx skills add secondme-team/skill-hub --all -g
+npx skills add second-me-01/skill-hub --all -g
 ```
 
 6 个 Skill，覆盖创意/设计/内容/开发/协作。
 安全扫描 + 质量评级 + 开源可审查。
 
-GitHub: github.com/secondme-team/skill-hub
+GitHub: github.com/second-me-01/skill-hub
 
 ---
 
