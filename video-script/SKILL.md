@@ -1,6 +1,6 @@
 ---
 name: video-script
-description: "视频脚本创作助手。帮助用户撰写视频脚本、设计分镜、生成字幕。Triggers: 视频脚本, 短视频, 分镜, video script, storyboard, 脚本, 字幕, subtitle, 视频文案, 口播, 拍摄脚本, 抖音, TikTok, B站"
+description: "视频脚本创作助手。帮助用户撰写视频脚本、设计分镜、生成字幕。Triggers: 视频脚本, 短视频, 分镜, video script, storyboard, 脚本, 字幕, subtitle, 视频文案, 口播, 拍摄脚本, 抖音, TikTok, B站, YouTube, Bilibili"
 version: "1.0.0"
 user-invocable: true
 ---

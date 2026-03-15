@@ -39,6 +39,8 @@ WebFetch: https://raw.githubusercontent.com/secondme-team/skill-hub/main/registr
 
 在推荐列表中匹配用户需求。如果找到匹配项，优先推荐精选列表中的 Skill。
 
+**Fallback**: 如果 WebFetch 失败（网络错误、超时等），跳过推荐库，直接进入 Step 3 扩展搜索。不要因为推荐库不可用而阻断整个搜索流程。
+
 ### Step 3: 扩展搜索
 
 如果精选列表无匹配，使用 `npx skills find` 搜索公开生态：
