@@ -336,6 +336,90 @@ send_bot_message "$CHAT_ID" "构建通知：全部测试通过"
 
 ---
 
+## 端到端场景示例
+
+### 场景 1：每日站会自动通知
+
+> 需求：每天早上 9:30 自动在团队群发送站会提醒，附带当天日期和会议链接。
+
+```bash
+# 1. 配置 Webhook
+export FEISHU_WEBHOOK_URL="https://open.feishu.cn/open-apis/bot/v2/hook/your-hook-id"
+
+# 2. 发送富文本卡片
+curl -X POST "$FEISHU_WEBHOOK_URL" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "msg_type": "interactive",
+    "card": {
+      "header": {
+        "title": {"tag": "plain_text", "content": "📋 每日站会提醒"},
+        "template": "blue"
+      },
+      "elements": [
+        {"tag": "div", "text": {"tag": "lark_md", "content": "**日期**: '"$(date +%Y-%m-%d)"'\n**时间**: 09:30-09:45\n**会议室**: 3楼A会议室"}},
+        {"tag": "action", "actions": [
+          {"tag": "button", "text": {"tag": "plain_text", "content": "加入会议"}, "url": "https://meetings.feishu.cn/your-meeting", "type": "primary"}
+        ]}
+      ]
+    }
+  }'
+```
+
+### 场景 2：将 GitHub Issue 同步到飞书多维表格
+
+> 需求：新建 Issue 时，自动在飞书多维表格追加一行记录。
+
+```bash
+# 1. 获取 Token
+TOKEN=$(curl -s -X POST "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal" \
+  -H "Content-Type: application/json" \
+  -d '{"app_id":"'"$FEISHU_APP_ID"'","app_secret":"'"$FEISHU_APP_SECRET"'"}' | python3 -c "import sys,json;print(json.load(sys.stdin)['tenant_access_token'])")
+
+# 2. 追加记录到多维表格
+APP_TOKEN="your_bitable_app_token"
+TABLE_ID="your_table_id"
+curl -X POST "https://open.feishu.cn/open-apis/bitable/v1/apps/$APP_TOKEN/tables/$TABLE_ID/records" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fields": {
+      "标题": "'"$ISSUE_TITLE"'",
+      "状态": "待处理",
+      "优先级": "P1",
+      "创建时间": '"$(date +%s000)"',
+      "链接": "'"$ISSUE_URL"'"
+    }
+  }'
+```
+
+### 场景 3：部署完成后发送通知 + 更新文档
+
+> 需求：CI/CD 部署完成后，同时推送群通知和更新版本文档。
+
+```bash
+# 1. 获取 Token
+source feishu-api.sh  # 使用 scripts/feishu-api.sh
+
+# 2. 发送群通知
+send_webhook_message "🚀 v$VERSION 部署完成 | 环境: $ENV | 耗时: ${DURATION}s"
+
+# 3. 更新版本文档（在文档末尾追加内容）
+DOC_TOKEN="your_doc_token"
+BLOCK_ID="your_block_id"
+curl -X POST "https://open.feishu.cn/open-apis/docx/v1/documents/$DOC_TOKEN/blocks/$BLOCK_ID/children" \
+  -H "Authorization: Bearer $(get_tenant_token)" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "children": [{
+      "block_type": 2,
+      "text": {"elements": [{"text_run": {"content": "v'"$VERSION"' - '"$(date +%Y-%m-%d)"' - 部署成功"}}]}
+    }]
+  }'
+```
+
+---
+
 ## 使用注意事项
 
 - **安全**：不要将 `FEISHU_APP_SECRET` 或 `FEISHU_WEBHOOK_URL` 硬编码到代码中，始终使用环境变量
