@@ -1,0 +1,112 @@
+name: Collect Skill Stats
+
+on:
+  schedule:
+    - cron: '17 * * * *'  # Every hour at :17
+  workflow_dispatch: {}
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install skills CLI
+        run: npm install -g @anthropic-ai/skills 2>/dev/null || true
+
+      - name: Collect our skills data
+        id: our_skills
+        run: |
+          OUTPUT=$(npx skills find "second-me-01" 2>/dev/null || echo "")
+          echo "output<<EOF" >> $GITHUB_OUTPUT
+          echo "$OUTPUT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Collect competitor data
+        id: competitors
+        run: |
+          XHS=$(npx skills find "xhs" 2>/dev/null || echo "")
+          BRAINSTORM=$(npx skills find "brainstorm" 2>/dev/null || echo "")
+          echo "xhs<<EOF" >> $GITHUB_OUTPUT
+          echo "$XHS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "brainstorm<<EOF" >> $GITHUB_OUTPUT
+          echo "$BRAINSTORM" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Parse and submit data
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+        run: |
+          node << 'SCRIPT'
+          const output = `${{ steps.our_skills.outputs.output }}`;
+          const xhsOutput = `${{ steps.competitors.outputs.xhs }}`;
+          const brainstormOutput = `${{ steps.competitors.outputs.brainstorm }}`;
+
+          function parseInstalls(text) {
+            const results = [];
+            const clean = text.replace(/\x1b\[[0-9;]*m/g, '');
+            const lines = clean.split('\n');
+            for (const line of lines) {
+              const match = line.trim().match(/^(.+?)@(.+?)\s+([\d,.]+K?)\s+installs?$/);
+              if (match) {
+                let installs = match[3].replace(/,/g, '');
+                if (installs.endsWith('K')) installs = String(parseFloat(installs) * 1000);
+                results.push({ repo: match[1], name: match[2], installs: Math.round(parseFloat(installs)) });
+              }
+            }
+            return results;
+          }
+
+          const ours = parseInstalls(output);
+          const xhs = parseInstalls(xhsOutput);
+          const brainstorm = parseInstalls(brainstormOutput);
+
+          // Map our skills
+          const data = [];
+          const ourMap = {
+            'skill-hub': 'skill-hub',
+            'smart-brainstorm': 'smart-brainstorm',
+            'ui-design-system': 'ui-design-system',
+            'xhs-writer': 'xhs-writer',
+            'video-script': 'video-script',
+            'feishu-kit': 'feishu-kit',
+          };
+
+          for (const s of ours) {
+            if (ourMap[s.name]) {
+              data.push({ skill_id: ourMap[s.name], installs: s.installs, platform: 'skills.sh' });
+            }
+          }
+
+          // Find specific competitors
+          const daqiXhs = xhs.find(s => s.repo.includes('daqi') && s.name.includes('xhs'));
+          if (daqiXhs) data.push({ skill_id: 'comp-daqi-xhs', installs: daqiXhs.installs, platform: 'skills.sh' });
+
+          const compBrainstorm = brainstorm.find(s => s.name === 'brainstorming' || s.name === 'brainstorm');
+          if (compBrainstorm) data.push({ skill_id: 'comp-brainstorming', installs: compBrainstorm.installs, platform: 'skills.sh' });
+
+          if (data.length === 0) {
+            console.log('No data collected, skipping API call');
+            process.exit(0);
+          }
+
+          console.log('Submitting data:', JSON.stringify(data, null, 2));
+
+          fetch(`${process.env.API_URL}/api/stats/collect`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-secret': process.env.API_SECRET,
+            },
+            body: JSON.stringify({ data }),
+          })
+          .then(r => r.json())
+          .then(r => console.log('API response:', r))
+          .catch(e => console.error('API error:', e));
+          SCRIPT
